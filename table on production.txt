@@ -1,0 +1,48 @@
+CREATE TABLE products_7041 (
+    product_id INT PRIMARY KEY,      
+    product_name VARCHAR(20),       
+    price DECIMAL(10, 2),            
+    category VARCHAR(20)          
+);
+
+INSERT INTO products_1 (product_id, product_name, price, category)
+VALUES (1, 'Wireless Mouse', 25.99, 'Electronics');
+
+INSERT ALL
+  INTO products_7041 (product_id, product_name, price, category) VALUES (1, 'Wireless Mouse', 25.99, 'Electronics')
+  INTO products_7041 (product_id, product_name, price, category) VALUES (2, 'Laptop Stand', 15.49, 'Accessories')
+  INTO products_7041 (product_id, product_name, price, category) VALUES (3, 'Bluetooth Speaker', 49.99, 'Audio')
+  INTO products_7041 (product_id, product_name, price, category) VALUES (4, 'USB-C Charger', 19.99, 'Electronics')
+  INTO products_7041 (product_id, product_name, price, category) VALUES (5, 'Yoga Mat', 22.00, 'Fitness')
+  INTO products_7041 (product_id, product_name, price, category) VALUES (6, 'Smart Watch', 199.99, 'Wearables')
+  INTO products_7041 (product_id, product_name, price, category) VALUES (7, 'HDMI Cable', 8.99, 'Accessories')
+  INTO products_7041 (product_id, product_name, price, category) VALUES (8, 'Noise-Canceling', 129.99, 'Audio')
+  INTO products_7041 (product_id, product_name, price, category) VALUES (9, 'Office Chair', 129.99, 'Furniture')
+  INTO products_7041 (product_id, product_name, price, category) VALUES (10, 'Coffee Maker', 49.00, 'Appliances')
+SELECT * FROM dual;
+
+
+SELECT product_name, category
+FROM products_7041
+WHERE price > 1000;
+
+
+ CREATE TABLE works_cse (
+          empid INT PRIMARY KEY,
+          cNAME VARCHAR(15),
+          salary number(20)
+       );
+
+    
+
+
+INSERT ALL
+ INTO works_cse (empid, cNAME , salary) VALUES (1, 'John Doe', 50000.00)
+ INTO works_cse (empid, cNAME , salary) VALUES (2, 'Jane Smith', 60000.00)
+ INTO works_cse (empid, cNAME, salary) VALUES (3, 'Alice Johnson', 75000.00)
+ INTO works_cse (empid, cNAME , salary) VALUES (4, 'Bob Brown', 45000.00)
+ INTO works_cse (empid, cNAME, salary) VALUES (5, 'Charlie Davis', 55000.00)
+SELECT * FROM DUAL;
+
+
+
