@@ -1,0 +1,49 @@
+CREATE TABLE employee_110 (
+    emp_id INT PRIMARY KEY,
+    fname VARCHAR(50),
+    lname VARCHAR(50),
+    dept_id INT,
+    salary DECIMAL(10, 2),
+    join_date DATE
+);
+
+
+
+CREATE TABLE department_110 (
+    dept_id INT PRIMARY KEY,
+    deptname VARCHAR(100)
+);
+
+
+CREATE TABLE project (
+    pro_id INT PRIMARY KEY,
+    pro_name VARCHAR(100),
+    budget DECIMAL(15, 2)
+);
+
+CREATE TABLE employee_projects (
+    emp_id INT,
+    pro_id INT,
+    assigned_date DATE,
+    role VARCHAR(100),
+    PRIMARY KEY (emp_id, pro_id), 
+    FOREIGN KEY (emp_id) REFERENCES employee_110(emp_id),
+    FOREIGN KEY (pro_id) REFERENCES project(pro_id)
+);
+
+CREATE TABLE employee (
+    emp_id INT PRIMARY KEY,
+    fname VARCHAR(50),
+    lname VARCHAR(50),
+    dept_id INT,
+    salary DECIMAL(10, 2),
+    join_date DATE,
+    FOREIGN KEY (dept_id) REFERENCES department_110(dept_id)
+);
+
+
+ INSERT INTO department_110 (dept_id, deptname)
+     SELECT 1, 'IT' FROM dual UNION ALL
+     SELECT 2, 'HR' FROM dual UNION ALL
+     SELECT 3, 'Finance' FROM dual UNION ALL
+     SELECT 4, 'Marketing' FROM dual;
