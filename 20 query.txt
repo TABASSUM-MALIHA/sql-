@@ -1,0 +1,99 @@
+CREATE TABLE employee_110 (
+    emp_id INT PRIMARY KEY,
+    fname VARCHAR(50),
+    lname VARCHAR(50),
+    dept_id INT,
+    salary DECIMAL(10, 2),
+    join_date DATE
+);
+
+
+
+CREATE TABLE department_110 (
+    dept_id INT PRIMARY KEY,
+    deptname VARCHAR(100)
+);
+
+
+CREATE TABLE project (
+    pro_id INT PRIMARY KEY,
+    pro_name VARCHAR(100),
+    budget DECIMAL(15, 2)
+);
+
+CREATE TABLE employee_projects (
+    emp_id INT,
+    pro_id INT,
+    assigned_date DATE,
+    role VARCHAR(100),
+    PRIMARY KEY (emp_id, pro_id), 
+    FOREIGN KEY (emp_id) REFERENCES employee_110(emp_id),
+    FOREIGN KEY (pro_id) REFERENCES project(pro_id)
+);
+
+CREATE TABLE employee (
+    emp_id INT PRIMARY KEY,
+    fname VARCHAR(50),
+    lname VARCHAR(50),
+    dept_id INT,
+    salary DECIMAL(10, 2),
+    join_date DATE,
+    FOREIGN KEY (dept_id) REFERENCES department_110(dept_id)
+);
+
+
+ INSERT INTO department_110 (dept_id, deptname)
+     SELECT 1, 'IT' FROM dual UNION ALL
+     SELECT 2, 'HR' FROM dual UNION ALL
+     SELECT 3, 'Finance' FROM dual UNION ALL
+     SELECT 4, 'Marketing' FROM dual;
+
+INSERT INTO project (pro_id, pro_name, budget)
+SELECT 1, 'Website', 50000.00 FROM dual UNION ALL
+SELECT 2, 'Mobile App', 75000.00 FROM dual UNION ALL
+SELECT 3, 'Data Migration', 120000.00 FROM dual UNION ALL
+SELECT 4, 'AI', 200000.00 FROM dual UNION ALL
+SELECT 5, 'Marketing', 40000.00 FROM dual;
+
+
+INSERT INTO employee_110 (emp_id, fname, lname, dept_id, salary, join_date)
+VALUES (1, 'John', 'Doe', 1, 70000, TO_DATE('2024-01-10', 'YYYY-MM-DD'));
+
+INSERT INTO employee_110 (emp_id, fname, lname, dept_id, salary, join_date)
+VALUES (2, 'Jane', 'Smith', 2, 60000, TO_DATE('2023-11-10', 'YYYY-MM-DD'));
+
+INSERT INTO employee_110 (emp_id, fname, lname, dept_id, salary, join_date)
+VALUES (3, 'Alice', 'Johnson', 3, 75000, TO_DATE('2023-10-25', 'YYYY-MM-DD'));
+
+INSERT INTO employee_110 (emp_id, fname, lname, dept_id, salary, join_date)
+VALUES (4, 'Bob', 'Brown', 4, 65000, TO_DATE('2024-02-05', 'YYYY-MM-DD'));
+
+
+
+SELECT e.emp_id, e.fname, e.lname, d.deptname
+FROM employee_110 e
+JOIN department_110 d ON e.dept_id = d.dept_id
+WHERE d.deptname = 'IT';
+
+SELECT fname, lname, join_date
+FROM employee_110;
+
+SELECT dept_id, deptname
+FROM department_110;
+
+SELECT COUNT(emp_id) AS total_employees
+FROM employee_110;
+
+
+SELECT salary
+FROM (
+    SELECT salary
+    FROM employee_110
+    ORDER BY salary DESC
+)
+WHERE ROWNUM <= 4;
+
+SELECT pro_id, pro_name, budget
+FROM project;
+
+
