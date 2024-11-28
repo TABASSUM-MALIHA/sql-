@@ -1,0 +1,59 @@
+SQL> desc employees
+output:
+ Name                                      Null?    Type
+ ----------------------------------------- -------- ----------------------------
+ EMP_ID                                    NOT NULL NUMBER(5)
+ F_NAME                                    NOT NULL VARCHAR2(15)
+ L_NAME                                    NOT NULL VARCHAR2(15)
+ HIRE_DATE                                          DATE
+ SALARY                                             NUMBER(10,2)
+
+ 
+SQL> select * from employees;
+output:
+
+    EMP_ID F_NAME          L_NAME          HIRE_DATE     SALARY
+---------- --------------- --------------- --------- ----------
+       101 jhon            doe             08-OCT-23      50000
+
+
+
+SQL> select emp_id,hire_date
+  2
+SQL> create view employee_basic_info as
+    select emp_id,hire_date
+     from employees;
+
+output: View created.
+
+SQL> select * from employee_basic_info;
+
+ output: 
+   EMP_ID HIRE_DATE
+---------- ---------
+       101 08-OCT-23
+
+
+CREATE OR REPLACE PROCEDURE greet_user (p_name IN VARCHAR2) AS
+BEGIN
+    DBMS_OUTPUT.PUT_LINE('HELLO,' || p_name || '!');
+  END;
+/
+
+SQL> SET SERVEROUTPUT ON;
+SQL> BEGIN
+     greet_user('maliha');
+     END;
+     /
+ OUTPUT: HELLO, maliha!
+
+PL/SQL procedure successfully completed.
+
+
+CREATE OR REPLACE TRIGGER LOG_employees_insert
+AFTER INSERT ON employees
+FOR EACH ROW
+BEGIN
+    DBMS_OUTPUT.PUT_LINE('New employee added: ' || :NEW.f_name || ' ' || :NEW.l_name);
+END;
+/
